@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [{bat_type:"cricket_bat", bat_size:100, bat_cost:250}, {bat_type:"shuttle_bat", bat_size:200, bat_cost:2000}, {bat_type:"baseball_bat", bat_size:150, bat_cost:2300}];
+
+
+  div(class = "container-fluid")
+    div(class = "row")
+      each b,index in results 
+        div(class = "col-sm-2" onclick = `buy(${index})`) Type: #{b.bat_type} <br/> Size: #{b.bat_size} <br/> Cost: #{b.bat_cost}
+
+  script.
+    function buy(x)
+    { 
+        alert(`You purchased item ${x}`)
+    }
