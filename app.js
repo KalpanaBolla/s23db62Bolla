@@ -4,12 +4,59 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Bat = require("./models/bat");
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+// Delete everything
+await Bat.deleteMany();
+let instance1 = new Bat({bat_type:"cricket_bat", bat_size:100,bat_cost:250});
+let instance2 = new Bat({bat_type:"shuttle_bat", bat_size:200,bat_cost:2000});
+let instance3 = new Bat({bat_type:"baseball_bat", bat_size:150,bat_cost:2300});
+
+instance1.save().then(doc=>{
+  console.log("First object saved")}
+  ).catch(err=>{
+  console.error(err)})
+
+  instance2.save().then(doc=>{
+    console.log("Second object saved")}
+    ).catch(err=>{
+    console.error(err)})
+
+    instance3.save().then(doc=>{
+      console.log("Third object saved")}
+      ).catch(err=>{
+      console.error(err)})
+
+
+}
+let reseed = true;
+if (reseed) { recreateDB();}
+
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var batRouter = require('./routes/bat');
 var boardRouter = require('./routes/board');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -28,6 +75,7 @@ app.use('/users', usersRouter);
 app.use('/bat', batRouter);
 app.use('/board', boardRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
