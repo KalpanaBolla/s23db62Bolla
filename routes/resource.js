@@ -12,7 +12,7 @@ router.post('/bats', bat_controller.bat_create_post);
 // DELETE request to delete bat.
 //router.delete('/bats/:id', bat_controller.bat_delete);
 // PUT request to update bat.
-//router.put('/bats/:id', bat_controller.bat_update_put);
+router.put('/bats/:id', bat_controller.bat_update_put);
 // GET request for one Bat.
 router.get('/bats/:id', bat_controller.bat_detail);
 // GET request for list of all Bat items.

@@ -26,6 +26,27 @@ res.send(`{"error": document for id ${req.params.id} not found`);
 };
 
 
+//Handle Bat update form on PUT.
+exports.bat_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await bat.findById( req.params.id)
+// Do updates of properties
+if(req.body.bat_type)
+toUpdate.bat_type = req.body.bat_type;
+if(req.body.bat_size) toUpdate.bat_size = req.body.bat_size;
+if(req.body.bat_cost) toUpdate.bat_cost = req.body.bat_cost;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
+};
+
 // // for a specific bat.
 // exports.bat_detail = function(req, res) {
 //  res.send('NOT IMPLEMENTED: bat detail: ' + req.params.id);
