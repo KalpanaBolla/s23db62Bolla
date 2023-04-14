@@ -14,7 +14,7 @@ router.post('/bats', bat_controller.bat_create_post);
 // PUT request to update bat.
 //router.put('/bats/:id', bat_controller.bat_update_put);
 // GET request for one Bat.
-//router.get('/bats/:id', bat_controller.bat_detail);
+router.get('/bats/:id', bat_controller.bat_detail);
 // GET request for list of all Bat items.
 router.get('/bats', bat_controller.bat_list);
 module.exports = router;

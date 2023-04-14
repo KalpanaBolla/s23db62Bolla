@@ -13,6 +13,18 @@ exports.bat_list = async function (req, res) {
     }
    };
 
+//for a specific Bat.
+exports.bat_detail = async function(req, res) {
+console.log("detail" + req.params.id)
+try {
+result = await bat.findById( req.params.id)
+res.send(result)
+} catch (error) {
+res.status(500)
+res.send(`{"error": document for id ${req.params.id} not found`);
+}
+};
+
 
 // // for a specific bat.
 // exports.bat_detail = function(req, res) {
