@@ -95,3 +95,31 @@ exports.bat_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
+   // Handle Ball delete on DELETE.
+exports.bat_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await bat.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+
+
+    // Handle a show one view with id specified by query
+exports.bat_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await bat.findById( req.query.id)
+    res.render('batdetail',
+    { title: 'Bat Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    

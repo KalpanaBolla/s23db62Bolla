@@ -10,7 +10,7 @@ router.get('/', api_controller.api);
 // POST request for creating a bat.
 router.post('/bats', bat_controller.bat_create_post);
 // DELETE request to delete bat.
-//router.delete('/bats/:id', bat_controller.bat_delete);
+router.delete('/bats/:id', bat_controller.bat_delete);
 // PUT request to update bat.
 router.put('/bats/:id', bat_controller.bat_update_put);
 // GET request for one Bat.
