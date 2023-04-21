@@ -2,16 +2,14 @@ extends layout
 
 block content
   h1= title
-  - var results = [{bat_type:"cricket_bat", bat_size:100, bat_cost:250}, {bat_type:"shuttle_bat", bat_size:200, bat_cost:2000}, {bat_type:"baseball_bat", bat_size:150, bat_cost:2300}];
-
-
-  div(class = "container-fluid")
-    div(class = "row")
-      each b,index in results 
-        div(class = "col-sm-2" onclick = `buy(${index})`) Type: #{b.bat_type} <br/> Size: #{b.bat_size} <br/> Cost: #{b.bat_cost}
-
+  - let bat=results
+  div(class="container-fluid")
+  div(class="row m-1")
+   each b,index in bat
+    - let destination = `dispatch(\"/bat/update?id=${b._id}\")`
+    div(class="col-sm-2" class="m-1") #{b.bat_type}, #{b.bat_size}, #{b.bat_cost}
+     button.btn( class="btn-primary ml-1", onclick= destination) Update
   script.
-    function buy(x)
-    { 
-        alert(`You purchased item ${x}`)
-    }
+   function dispatch(path){
+   window.location.href=path
+   }

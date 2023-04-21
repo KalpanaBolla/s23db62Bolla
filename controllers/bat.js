@@ -68,7 +68,7 @@ failed`);
 exports.bat_view_all_Page = async function(req, res) {
     try{
     theBats = await bat.find();
-    res.render('bat', { title: 'bat Search Results', results: thebats });
+    res.render('bat', { title: 'Bat Search Results', results: thebats });
     }
     catch(err){
     res.status(500);
