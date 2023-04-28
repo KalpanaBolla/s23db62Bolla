@@ -3,13 +3,21 @@ extends layout
 block content
   h1= title
   - let bat=results
+  - let c=`dispatch(\"/bat/create\")`
+  button.btn( class="btn-primary", onclick= c) Create
   div(class="container-fluid")
-  div(class="row m-1")
+  div(class="row")
    each b,index in bat
     - let destination = `dispatch(\"/bat/update?id=${b._id}\")`
-    div(class="col-sm-2" class="m-1") #{b.bat_type}, #{b.bat_size}, #{b.bat_cost}
+    - let d1 = `dispatch(\"/bat/detail?id=${b._id}\")`
+    - let d2 = `dispatch(\"/bat/delete?id=${b._id}\")`
+    div(class="col-sm-2" class="m-1") 
+     div(class="row") #{b.bat_type}, #{b.bat_size}, #{b.bat_cost}
      button.btn( class="btn-primary ml-1", onclick= destination) Update
+     button.btn( class="btn-primary ml-1", onclick= d1) View
+     button.btn( class="btn-primary ml-1", onclick= d2) Delete 
+  
   script.
    function dispatch(path){
-   window.location.href=path
+    window.location.href=path
    }
